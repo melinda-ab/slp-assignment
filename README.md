@@ -5,6 +5,7 @@ Repositori ini berisi implementasi **Single Layer Perceptron (SLP)**. Model ini 
 ---
 ## Fitur Utama
 * **Matematis Mandiri:** Menjalankan propagasi maju (*forward propagation*), perhitungan gradien, dan pembaruan bobot (*weight update*) murni menggunakan operasi aljabar linear.
+* **Splitting Data Terstruktur:** Membagi dataset utuh secara sistematis menjadi data latih dan validasi dengan mempertahankan proporsi kelas (mengambil tepat 10 baris terakhir per kelas target) menggunakan metode `iloc` dari Pandas.
 * **Pelacakan Evaluasi Terpadu:** Mencatat metrik *Sum Squared Error* (SSE) dan Akurasi secara simultan selama iterasi berjalan (*on-the-fly*) untuk efisiensi memori.
 * **Pengujian Validasi:** Melakukan komparasi performa model pada data latih (*training*) dan data uji (*validation*) pada setiap akhir *epoch*.
 * **Visualisasi *Learning Curve*:** Merender grafik pergerakan Akurasi dan rata-rata Error menggunakan palet warna yang modern dan kontras untuk memantau titik konvergensi model.
@@ -16,9 +17,9 @@ Repositori ini berisi implementasi **Single Layer Perceptron (SLP)**. Model ini 
 * **Matplotlib:** Pembuatan plot grafik hasil evaluasi per *epoch*.
 
 ## Informasi Dataset
-Menggunakan varian dataset botani klasik (Iris Dataset) yang telah dibagi menjadi dua tahap pengujian:
-* `slp-train.csv`: Berisi 80 baris data latih.
-* `slp-val.csv`: Berisi 20 baris data validasi terpisah untuk menguji generalisasi model.
+Menggunakan varian dataset botani klasik (Iris Dataset) yang dimuat dari file utuh `dataset.csv` dan dibagi ke dalam dua tahap pengujian langsung di dalam kode:
+* **Data Latih:** Berisi 80 baris data yang dialokasikan dari bagian awal setiap kelas.
+* **Data Validasi:** Berisi 20 baris data (10 baris terakhir khusus di kelas `0` dan `1`) untuk menguji generalisasi model.
 
 **Struktur Kolom:**
 * **Input (Fitur):** Terdiri dari 4 atribut pengukuran numerik (`X1`, `X2`, `X3`, `X4`).
@@ -30,7 +31,7 @@ Model SLP ini berhasil beradaptasi dengan sangat baik dan mencapai konvergensi h
 | Metrik Evaluasi | Data Training | Data Validation |
 | :--- | :---: | :---: |
 | **Akurasi** | 98.75% | 100% |
-| **Rata-rata SSE** | 0.0127 | 0.0808 |
+| **Rata-rata SSE** | 0.0127 | 0.0816 |
 
 Berdasarkan hasil visualisasi *Learning Curve*, model menunjukkan kemampuan generalisasi yang sangat baik tanpa mengalami *overfitting*. Hal ini ditunjukkan oleh kurva Akurasi yang naik secara konsisten mendekati angka 1.0, serta kurva *Error* (SSE) yang melandai turun secara drastis baik pada data *training* maupun *validation*.
 
@@ -38,9 +39,10 @@ Berdasarkan hasil visualisasi *Learning Curve*, model menunjukkan kemampuan gene
 
 ## Cara Penggunaan
 1. Pastikan *environment* Python sudah terinstal library `numpy`, `pandas`, dan `matplotlib`.
-2. Simpan dataset (`slp-train.csv` & `slp-val.csv`) dalam satu struktur folder (*directory*) yang sama dengan file `.ipynb`.
+2. Simpan dataset (`dataset.csv`) dalam satu struktur folder (*directory*) yang sama dengan file `.ipynb`.
 3. Jalankan *Jupyter Notebook* secara berurutan (*Run All Cells*) dari proses *Load Data* hingga *Visualisasi*.
 
 ---
 **Penulis**
+
 Melinda Annastasia Budijono | 24/54280/PA/23052
